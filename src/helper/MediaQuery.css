@@ -1,0 +1,23 @@
+/* Mobile S */
+@media (width <= 320px) {
+}
+
+/* Mobile M */
+@media (320px <= width <= 375px) {
+}
+
+/* Mobile L */
+@media (375px <= width <= 425px) {
+}
+
+/* Tablet */
+@media (425px <= width <= 768px) {
+}
+
+/* Laptop */
+@media (768px <= width <= 1024px) {
+}
+
+/* Laptop L */
+@media (1024px <= width <= 1440px) {
+}
