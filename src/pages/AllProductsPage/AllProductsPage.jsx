@@ -1,5 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useProductsStore } from "../../store/productsStore";
 
 export const AllProductsPage = () => {
-  return <></>;
+  const createProductsListFromJson = useProductsStore((state) => (state.createProductsListFromJson));
+  const products = useProductsStore((state) => (state.products));
+
+  useEffect(() => {
+    createProductsListFromJson();
+  }, []);
+
+  return <div>{products.length}</div>;
 };
