@@ -1,7 +1,8 @@
 .header {
+  box-sizing: border-box;
   background-color: burlywood;
   width: 100%;
-  height: min-content;
+  height: 50px;
 	box-shadow: 3px 3px 8px gainsboro;
 }
 
