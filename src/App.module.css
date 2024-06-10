@@ -13,3 +13,7 @@ a {
   font-optical-sizing: auto;
   font-style: normal;
 }
+
+.App {
+  overflow: hidden;
+}

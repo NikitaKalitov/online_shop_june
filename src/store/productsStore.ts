@@ -19,7 +19,7 @@ export const useProductsStore = create<ProductsState>()((set, get) => ({
   //
   //
   createProductsListFromJson: async () => {
-    if (useProductsStore.getState().products.length == 0) {
+    if (useProductsStore.getState().products.length === 0) {
       const productsJson = await fetchAllProducts();
       let products: Array<Product> = [];
       for (let i = 0; i < productsJson.length; i++) {
@@ -30,20 +30,23 @@ export const useProductsStore = create<ProductsState>()((set, get) => ({
   },
   //
   addProductToCart: (id: number) =>
-    set((state) => ({ idsForProductsInCart: [...state.idsForProductsInCart, id] })),
+    set((state) => ({
+      idsForProductsInCart: [...state.idsForProductsInCart, id],
+    })),
   //
   createCartListFromData: async () => {
     await get().createProductsListFromJson();
-    if (get().idsForProductsInCart.length != get().productsInCart.length) {
+    if (get().idsForProductsInCart.length !== get().productsInCart.length) {
       let productsInCart: Array<Product> = [];
       for (let i = 0; i < get().idsForProductsInCart.length; i++) {
-        productsInCart.push(get().products.filter((product) =>
-          product.id == get().idsForProductsInCart[i])[0])
+        productsInCart.push(
+          get().products.filter(
+            (product) => product.id === get().idsForProductsInCart[i]
+          )[0]
+        );
       }
       set({ productsInCart: [...productsInCart] });
     }
-  }
+  },
   //
 }));
-
-

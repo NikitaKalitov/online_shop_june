@@ -5,22 +5,20 @@ import { CartPage } from "../../pages/CartPage/CartPage";
 import { useNavigationStore } from "../../store/navigationStore";
 
 export const MainLayout = () => {
-
   return (
-    <div>
+    <>
       <Header />
-      <Body/>
-    </div>
+      <Body />
+    </>
   );
 };
 
 const Body = () => {
-  
-  const currentPage = useNavigationStore((state) => (state.currentPage));
+  const currentPage = useNavigationStore((state) => state.currentPage);
 
   return (
-    <div>
-      {currentPage == 'allProductsPage' ? <AllProductsPage /> : <CartPage/>}
-    </div>
+    <>
+      {currentPage === "allProductsPage" ? <AllProductsPage /> : <CartPage />}
+    </>
   );
-}
+};
