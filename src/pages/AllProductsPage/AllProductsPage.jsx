@@ -37,7 +37,7 @@ const ProductsListView = ({ products }) => {
   return (
     <div className={styles.products_list_view}>
       {products.map(function (product) {
-        return <Card />;
+        return <Card product={product} key={product.id} />;
       })}
     </div>
   );

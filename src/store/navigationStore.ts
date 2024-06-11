@@ -25,7 +25,6 @@ export const useNavigationStore = create<NavigationState>((set, get) => ({
   changeCurrentPage: (newPage) => {
     if (get().currentPage !== newPage) {
       set({ currentPage: newPage });
-      console.log(get().currentPage);
     }
   },
   //

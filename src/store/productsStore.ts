@@ -29,10 +29,19 @@ export const useProductsStore = create<ProductsState>()((set, get) => ({
     }
   },
   //
-  addProductToCart: (id: number) =>
-    set((state) => ({
-      idsForProductsInCart: [...state.idsForProductsInCart, id],
-    })),
+  addProductToCart: (id: number) => {
+    if (
+      !get().idsForProductsInCart.filter((productId) => productId === id)[0]
+    ) {
+      const productToCart: Product = get().products.filter(
+        (product) => product.id === id
+      )[0];
+      set((state) => ({
+        idsForProductsInCart: [...state.idsForProductsInCart, id],
+        productsInCart: [...state.productsInCart, productToCart],
+      }));
+    }
+  },
   //
   createCartListFromData: async () => {
     await get().createProductsListFromJson();

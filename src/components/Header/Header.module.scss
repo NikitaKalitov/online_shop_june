@@ -1,0 +1,31 @@
+.header {
+  box-sizing: border-box;
+  background-color: burlywood;
+  width: 100%;
+  height: 50px;
+  box-shadow: 3px 3px 8px gainsboro;
+
+  .header_content {
+    height: 100%;
+    margin: auto;
+    padding: 15px;
+    max-width: 768px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .icon {
+    margin-right: 5px;
+  }
+
+  .link {
+    color: white;
+    text-shadow: 1px 1px 5px black;
+  }
+
+  .link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
