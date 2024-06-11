@@ -6,9 +6,14 @@ interface ProductsState {
   products: Array<Product>;
   idsForProductsInCart: Array<number>;
   productsInCart: Array<Product>;
+  descProductId: number;
   createProductsListFromJson: () => Promise<void>;
+  onButtonClick: (id: number, addToCart: boolean) => void;
   addProductToCart: (id: number) => void;
+  removeProductFromCart: (id: number) => void;
   createCartListFromData: () => void;
+  setDescProductId: (id: number) => void;
+  clearDescProductId: () => void;
 }
 
 export const useProductsStore = create<ProductsState>()((set, get) => ({
@@ -16,6 +21,7 @@ export const useProductsStore = create<ProductsState>()((set, get) => ({
   products: [],
   idsForProductsInCart: [],
   productsInCart: [],
+  descProductId: 0,
   //
   //
   createProductsListFromJson: async () => {
@@ -27,6 +33,10 @@ export const useProductsStore = create<ProductsState>()((set, get) => ({
       }
       set({ products: [...products] });
     }
+  },
+  //
+  onButtonClick: (id: number, addToCart: boolean) => {
+    addToCart ? get().addProductToCart(id) : get().removeProductFromCart(id);
   },
   //
   addProductToCart: (id: number) => {
@@ -43,6 +53,19 @@ export const useProductsStore = create<ProductsState>()((set, get) => ({
     }
   },
   //
+  removeProductFromCart: (id: number) => {
+    const newProductIds: Array<number> = get().idsForProductsInCart.filter(
+      (productId) => productId !== id
+    );
+    const newProductsInCart: Array<Product> = get().productsInCart.filter(
+      (product) => product.id !== id
+    );
+    set({
+      idsForProductsInCart: newProductIds,
+      productsInCart: newProductsInCart,
+    });
+  },
+  //
   createCartListFromData: async () => {
     await get().createProductsListFromJson();
     if (get().idsForProductsInCart.length !== get().productsInCart.length) {
@@ -56,6 +79,14 @@ export const useProductsStore = create<ProductsState>()((set, get) => ({
       }
       set({ productsInCart: [...productsInCart] });
     }
+  },
+  //
+  setDescProductId: (id: number) => {
+    set({ descProductId: id });
+  },
+  //
+  clearDescProductId: () => {
+    set({ descProductId: 0 });
   },
   //
 }));

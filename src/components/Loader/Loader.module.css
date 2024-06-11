@@ -22,3 +22,16 @@
     transform: rotate(360deg);
   }
 }
+
+.loader_view {
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

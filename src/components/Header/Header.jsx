@@ -1,7 +1,7 @@
 import { faCartShopping, faList } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useNavigationStore } from "../../store/navigationStore";
+import { useNavigationStore } from "../../stores/navigationStore";
 import styles from "./Header.module.scss";
 
 export const Header = () => {

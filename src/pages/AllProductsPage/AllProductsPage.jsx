@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { Card } from "../../components/Card/Card";
-import { Loader } from "../../components/Loader/Loader";
-import { useProductsStore } from "../../store/productsStore";
-import styles from "./AllProductsPage.module.css";
+import { LoaderView } from "../../components/Loader/Loader";
+import { useProductsStore } from "../../stores/productsStore";
+import { ProductsListView } from "../../components/ProductList/ProductList";
 
 export const AllProductsPage = () => {
   const createProductsListFromJson = useProductsStore(
@@ -19,26 +18,8 @@ export const AllProductsPage = () => {
       {products.length === 0 ? (
         <LoaderView />
       ) : (
-        <ProductsListView products={products} />
+        <ProductsListView products={products} isAllProductsPage={true} />
       )}
     </>
-  );
-};
-
-const LoaderView = () => {
-  return (
-    <div className={styles.loader_view}>
-      <Loader />
-    </div>
-  );
-};
-
-const ProductsListView = ({ products }) => {
-  return (
-    <div className={styles.products_list_view}>
-      {products.map(function (product) {
-        return <Card product={product} key={product.id} />;
-      })}
-    </div>
   );
 };
