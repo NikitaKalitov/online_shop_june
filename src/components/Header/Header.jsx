@@ -1,23 +1,15 @@
-import { faCartShopping, faList } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { useNavigationStore } from "../../stores/navigationStore";
-import styles from "./Header.module.scss";
+import { faCartShopping, faList } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as React from 'react';
+import { useNavigationStore } from '../../stores/navigationStore';
+import styles from './Header.module.scss';
 
 export const Header = () => {
   return (
     <div className={styles.header}>
       <div className={styles.header_content}>
-        <Link
-          icon={faList}
-          text={"Продукты"}
-          goTo={useNavigationStore.getState().goToAllProductsPage}
-        />
-        <Link
-          icon={faCartShopping}
-          text={"Корзина"}
-          goTo={useNavigationStore.getState().goToCartPage}
-        />
+        <Link icon={faList} text={'Продукты'} goTo={useNavigationStore.getState().goToAllProductsPage} />
+        <Link icon={faCartShopping} text={'Корзина'} goTo={useNavigationStore.getState().goToCartPage} />
       </div>
     </div>
   );
@@ -26,7 +18,6 @@ export const Header = () => {
 const Link = ({ icon, text, goTo }) => {
   return (
     <div
-      className={styles.link}
       onClick={() => {
         goTo();
       }}

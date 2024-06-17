@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { useProductsStore } from "../../stores/productsStore";
 
 export const ProductDescPage = () => {
