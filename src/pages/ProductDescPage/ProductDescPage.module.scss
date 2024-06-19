@@ -1,0 +1,35 @@
+.page {
+  width: 100%;
+  height: calc(100% - 50px);
+  position: absolute;
+}
+
+.page_view {
+  width: 800px;
+  margin: 10px auto 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title_desc {
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.main_info {
+}
+
+.image {
+  display: block;
+  box-shadow: 1px 1px 5px grey;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+}

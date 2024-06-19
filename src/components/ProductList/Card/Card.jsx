@@ -1,10 +1,15 @@
-import * as React from 'react';
-import styles from './Card.module.scss';
-import { useProductsStore } from '../../../stores/productsStore';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
-import * as classNames from 'classnames';
-import { useNavigationStore } from '../../../stores/navigationStore';
+import * as React from "react";
+import styles from "./Card.module.scss";
+import { useProductsStore } from "../../../stores/productsStore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCartPlus,
+  faCheck,
+  faStar,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
+import * as classNames from "classnames";
+import { useNavigationStore } from "../../../stores/navigationStore";
 
 export const Card = ({ product }) => {
   return (
@@ -36,15 +41,12 @@ export const CartCard = ({ product }) => {
         <Image link={product.thumbnail} />
         <div className={styles.info}>
           <div className={styles.title_brand}>
-            <Title title={product.title} id={product.id} />
+            <TitleCart title={product.title} />
             <Brand brand={product.brand} />
           </div>
-          <div className={styles.rating_price_button}>
-            <Rating rating={product.rating} />
-            <div className={styles.price_button}>
-              <Price price={product.price} />
-              <ButtonCart id={product.id} />
-            </div>
+          <div className={styles.price_button_cart}>
+            <Price price={product.price} />
+            <ButtonCart id={product.id} />
           </div>
         </div>
       </div>
@@ -53,7 +55,9 @@ export const CartCard = ({ product }) => {
 };
 
 const Image = ({ link }) => {
-  return <img className={styles.card_product_image} src={link} alt="cardImage" />;
+  return (
+    <img className={styles.card_product_image} src={link} alt="cardImage" />
+  );
 };
 
 const Title = ({ title, id }) => {
@@ -65,13 +69,30 @@ const Title = ({ title, id }) => {
         onTitleClick(id);
       }}
     >
-      {title}
+      <span>{title}</span>
+    </p>
+  );
+};
+
+const TitleCart = ({ title }) => {
+  return (
+    <p className={styles.card_product_title_cart}>
+      <span>{title}</span>
     </p>
   );
 };
 
 const Rating = ({ rating }) => {
-  return <p className={styles.card_product_rating}>{rating}/5</p>;
+  return (
+    <div className={styles.card_product_rating_container}>
+      <p className={styles.card_product_rating}>
+        {rating}/5
+        <span className={styles.card_product_rating_icon}>
+          <FontAwesomeIcon icon={faStar} />
+        </span>
+      </p>
+    </div>
+  );
 };
 
 const Price = ({ price }) => {
@@ -79,12 +100,18 @@ const Price = ({ price }) => {
 };
 
 const Brand = ({ brand }) => {
-  return <p className={styles.card_product_brand}>{brand}</p>;
+  return (
+    <p className={styles.card_product_brand}>
+      <span>{brand}</span>
+    </p>
+  );
 };
 
 const Button = ({ id }) => {
   const onButtonClick = useProductsStore((state) => state.onButtonClick);
-  const idsForProductsInCart = useProductsStore((state) => state.idsForProductsInCart);
+  const idsForProductsInCart = useProductsStore(
+    (state) => state.idsForProductsInCart
+  );
 
   return (
     <div
