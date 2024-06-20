@@ -8,8 +8,8 @@ export const Header = () => {
   return (
     <div className={styles.header}>
       <div className={styles.header_content}>
-        <Link icon={faList} text={'Продукты'} goTo={useNavigationStore.getState().goToAllProductsPage} />
-        <Link icon={faCartShopping} text={'Корзина'} goTo={useNavigationStore.getState().goToCartPage} />
+        <Link icon={faList} text={'Products'} goTo={useNavigationStore.getState().goToAllProductsPage} />
+        <Link icon={faCartShopping} text={'Cart'} goTo={useNavigationStore.getState().goToCartPage} />
       </div>
     </div>
   );

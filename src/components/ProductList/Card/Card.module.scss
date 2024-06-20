@@ -44,7 +44,10 @@
   color: black;
 
   span {
-    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }
 
@@ -57,7 +60,10 @@
   font-weight: 700;
 
   span {
-    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }
 
@@ -140,6 +146,7 @@
   align-items: center;
   justify-content: space-between;
   max-width: 450px;
+
   @media screen and (width < 600px) {
     flex-direction: column;
     align-items: flex-start;

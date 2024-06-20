@@ -8,6 +8,7 @@ interface ProductsState {
   idsForProductsInCart: Array<number>;
   productsInCart: Array<Product>;
   descProductId: number;
+  currentProduct: Product;
   createProductsListFromJson: () => Promise<void>;
   onButtonClick: (id: number, addToCart: boolean) => void;
   addProductToCart: (id: number) => void;
@@ -26,6 +27,7 @@ export const useProductsStore = create<ProductsState>()(
       idsForProductsInCart: [],
       productsInCart: [],
       descProductId: 0,
+      currentProduct: Product.empty(),
       //
       //
       createProductsListFromJson: async () => {
@@ -97,14 +99,25 @@ export const useProductsStore = create<ProductsState>()(
       },
       //
       getProductById: async () => {
-        const product = await fetchProductById(get().descProductId);
-        return product;
+        if (
+          get().currentProduct.id === 0 ||
+          get().currentProduct.id !== get().descProductId
+        ) {
+          const product = await fetchProductById(get().descProductId);
+          set({ currentProduct: product });
+          return product;
+        } else {
+          return get().currentProduct;
+        }
       },
       //
     }),
     {
       name: "products-store",
       storage: createJSONStorage(() => sessionStorage),
+      partialize: (state) => ({
+        idsForProductsInCart: state.idsForProductsInCart,
+      }),
     }
   )
 );

@@ -4,6 +4,8 @@ import styles from "./ProductDescPage.module.scss";
 import { useEffect, useState } from "react";
 import { Product } from "../../models/models";
 import { LoaderView } from "../../components/Loader/Loader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export const ProductDescPage = () => {
   const [product, setProduct] = useState(Product.empty());
@@ -30,8 +32,19 @@ const ProductDescView = ({ product }: { product: Product }) => {
           <ProductImage image={product.thumbnail} />
           <div className={styles.main_info}>
             <ProductTitle title={product.title} />
-            <ProductDescription desc={product.description} />
+            <ProductBrand brand={product.brand} />
+            <ProductCategory category={product.category} />
+            <ProductTags tags={product.tags} />
+            <ProductStock
+              stock={product.stock}
+              availability={product.availability}
+            />
+            <ProductRating rating={product.rating} />
+            <ProductPrice price={product.price} discount={product.discount} />
           </div>
+        </div>
+        <div className={styles.middle}>
+          <ProductDescription desc={product.description} />
         </div>
       </div>
     </div>
@@ -46,10 +59,74 @@ const ProductTitle = ({ title }: { title: string }) => {
   return <p className={styles.title}>{title}</p>;
 };
 
-const ProductDescription = ({ desc }: { desc: string }) => {
+const ProductBrand = ({ brand }: { brand: string }) => {
   return (
-    <div>
-      <p>{desc}</p>
+    <p>
+      <span className={styles.brand}>{brand}</span>
+    </p>
+  );
+};
+
+const ProductCategory = ({ category }: { category: string }) => {
+  return (
+    <p className={styles.category}>
+      Category: <span>{category}</span>
+    </p>
+  );
+};
+
+const ProductTags = ({ tags }: { tags: Array<string> }) => {
+  return (
+    <p className={styles.tags}>
+      Tags:
+      {tags.map((tag, index) => (
+        <span key={index}>
+          <span className={styles.hover}>{tag}</span>
+        </span>
+      ))}
+    </p>
+  );
+};
+
+const ProductStock = ({
+  stock,
+  availability,
+}: {
+  stock: number;
+  availability: string;
+}) => {
+  return (
+    <p className={styles.stock}>
+      Stock: <span>{stock}</span> ({availability})
+    </p>
+  );
+};
+
+const ProductRating = ({ rating }: { rating: number }) => {
+  return (
+    <p className={styles.rating}>
+      <span>{rating}/5</span>
+      <FontAwesomeIcon icon={faStar} className={styles.rating_icon} />
+    </p>
+  );
+};
+
+const ProductPrice = ({
+  price,
+  discount,
+}: {
+  price: number;
+  discount: number;
+}) => {
+  return (
+    <div className={styles.price}>
+      <span>
+        {price}$ <span className={styles.italic}>(-{discount}%)</span>
+      </span>
     </div>
   );
+};
+
+const ProductDescription = ({ desc }: { desc: string }) => {
+  return <p className={styles.description}>{desc}</p>;
 };
