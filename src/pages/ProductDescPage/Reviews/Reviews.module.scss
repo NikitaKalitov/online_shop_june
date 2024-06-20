@@ -1,0 +1,34 @@
+.container {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.body {
+  background-color: red;
+  transition: linear 500ms;
+  height: 1000px;
+  box-sizing: border-box;
+}
+
+.none {
+  height: 0px;
+  transition: linear 500ms;
+}
+
+.review_container {
+  height: 100px;
+  margin: 10px;
+  background-color: white;
+}

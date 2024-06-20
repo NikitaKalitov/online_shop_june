@@ -4,6 +4,8 @@
   position: absolute;
   padding: 10px;
   box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .page_view {
@@ -136,6 +138,9 @@
 
 .middle {
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .description {

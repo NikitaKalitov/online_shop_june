@@ -6,6 +6,7 @@ import { Product } from "../../models/models";
 import { LoaderView } from "../../components/Loader/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { ReviewsView } from "./Reviews/Reviews";
 
 export const ProductDescPage = () => {
   const [product, setProduct] = useState(Product.empty());
@@ -45,6 +46,7 @@ const ProductDescView = ({ product }: { product: Product }) => {
         </div>
         <div className={styles.middle}>
           <ProductDescription desc={product.description} />
+          <ReviewsView />
         </div>
       </div>
     </div>

@@ -4,6 +4,16 @@
   ],
   "hints": {
     "typescript-config/consistent-casing": "off",
-    "typescript-config/strict": "off"
+    "typescript-config/strict": "off",
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "width: fit-content",
+          "height: fit-content"
+        ]
+      }
+    ],
+    "no-inline-styles": "off"
   }
 }

@@ -42,7 +42,7 @@ export const CartCard = ({ product }) => {
         <div className={styles.info}>
           <div className={styles.title_brand}>
             <TitleCart title={product.title} />
-            <Brand brand={product.brand} />
+            <BrandCart brand={product.brand} />
           </div>
           <div className={styles.price_button_cart}>
             <Price price={product.price} />
@@ -102,6 +102,14 @@ const Price = ({ price }) => {
 const Brand = ({ brand }) => {
   return (
     <p className={styles.card_product_brand}>
+      <span>{brand}</span>
+    </p>
+  );
+};
+
+const BrandCart = ({ brand }) => {
+  return (
+    <p className={styles.card_product_brand_cart}>
       <span>{brand}</span>
     </p>
   );
