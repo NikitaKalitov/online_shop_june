@@ -1,34 +1,135 @@
-.container {
-  background-color: white;
-  padding: 10px;
-  border-radius: 10px;
+.view_container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .button {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  box-shadow: 1px 1px 5px grey;
 
   &:hover {
     text-decoration: underline;
     cursor: pointer;
+    box-shadow: 2px 2px 8px grey;
+  }
+
+  &:active {
+    box-shadow: 1px 1px 1px grey;
   }
 }
 
-.body {
-  background-color: red;
-  transition: linear 500ms;
-  height: 1000px;
+.arrow_down {
+  transform: rotate(0deg);
+  transition: transform 0.5s linear;
+}
+.arrow_up {
+  transform: rotate(180deg);
+  transition: transform 0.5s linear;
+}
+
+.review_section {
+  padding: 0px 20px;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
   box-sizing: border-box;
 }
 
-.none {
-  height: 0px;
-  transition: linear 500ms;
+.review_container {
+  padding: 10px 0px;
 }
 
-.review_container {
-  height: 100px;
-  margin: 10px;
+.review_body {
+  padding: 10px;
+  border-radius: 10px;
   background-color: white;
+  height: 100%;
+  box-shadow: 1px 1px 5px grey;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @media screen and (width < 620px) {
+      flex-direction: column;
+      gap: 5px;
+
+      .date {
+        // align-self: start;
+        order: 1;
+      }
+
+      .reviewer {
+        order: 2;
+      }
+    }
+
+    .reviewer {
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+      // overflow: hidden;
+      // white-space: nowrap;
+
+      @media screen and (width < 700px) {
+        flex-direction: column;
+        gap: 0px;
+      }
+
+      .name {
+        font-weight: 600;
+      }
+
+      .email {
+        overflow: hidden;
+        white-space: nowrap;
+
+        p {
+          font-style: italic;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    .date {
+      text-decoration: underline;
+    }
+  }
+
+  .middle {
+    .comment {
+      text-indent: 10px;
+      text-align: justify;
+    }
+  }
+
+  .low {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .rating {
+      font-size: 16px;
+      background-color: whitesmoke;
+      border-radius: 8px;
+      box-shadow: 1px 1px 5px grey;
+      padding: 3px 8px;
+      width: fit-content;
+    }
+
+    .rating_icon {
+      color: orange;
+      margin-left: 5px;
+    }
+  }
 }

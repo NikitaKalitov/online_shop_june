@@ -11,7 +11,7 @@ export class Product {
   rating: number;
   price: number;
   tags: Array<string>;
-  reviews: Array<Review>;
+  reviews: Array<ReviewClass>;
 
   constructor(
     id: number,
@@ -26,7 +26,7 @@ export class Product {
     rating: number,
     price: number,
     tags: Array<string>,
-    reviews: Array<Review>
+    reviews: Array<ReviewClass>
   ) {
     this.id = id;
     this.title = title;
@@ -57,7 +57,7 @@ export class Product {
       json.rating,
       json.price,
       json.tags,
-      Review.fromJson(json.reviews)
+      ReviewClass.fromJson(json.reviews)
     );
   }
 
@@ -66,7 +66,7 @@ export class Product {
   }
 }
 
-export class Review {
+export class ReviewClass {
   rating: number;
   comment: string;
   date: DateClass;
@@ -87,16 +87,16 @@ export class Review {
     this.reviewerEmail = reviewerEmail;
   }
 
-  static fromJson(json: any): Array<Review> {
-    let array: Array<Review> = [];
+  static fromJson(json: any): Array<ReviewClass> {
+    let array: Array<ReviewClass> = [];
     for (let i = 0; i < json.length; i++) {
-      array.push(Review.fromJsonReview(json[i]));
+      array.push(ReviewClass.fromJsonReview(json[i]));
     }
     return array;
   }
 
-  static fromJsonReview(json: any): Review {
-    return new Review(
+  static fromJsonReview(json: any): ReviewClass {
+    return new ReviewClass(
       json.rating,
       json.comment,
       DateClass.fromJson(json.date),
@@ -106,7 +106,7 @@ export class Review {
   }
 }
 
-class DateClass {
+export class DateClass {
   year: number;
   month: number;
   day: number;
