@@ -63,13 +63,14 @@ const Image = ({ link }) => {
 const Title = ({ title, id }) => {
   const onTitleClick = useNavigationStore((state) => state.goProductDescPage);
   return (
-    <p
-      className={styles.card_product_title}
-      onClick={() => {
-        onTitleClick(id);
-      }}
-    >
-      <span>{title}</span>
+    <p className={styles.card_product_title}>
+      <span
+        onClick={() => {
+          onTitleClick(id);
+        }}
+      >
+        {title}
+      </span>
     </p>
   );
 };

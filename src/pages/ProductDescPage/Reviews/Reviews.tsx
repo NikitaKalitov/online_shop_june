@@ -118,5 +118,5 @@ const ReviewerRating = ({ rating }: { rating: number }) => {
 };
 
 const Opinion = () => {
-  return <p>Like this review?</p>;
+  return <p className={styles.opinion}>Like this review?</p>;
 };

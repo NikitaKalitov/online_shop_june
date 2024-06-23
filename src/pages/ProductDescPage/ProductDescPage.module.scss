@@ -59,9 +59,18 @@
   font-weight: bold;
   color: rgb(75, 75, 75);
 
-  &:hover {
-    text-decoration: underline;
-    cursor: pointer;
+  @media (hover: hover) {
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }
 
@@ -70,9 +79,19 @@
 
   span {
     font-style: italic;
-    &:hover {
-      text-decoration: underline;
-      cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    @media (hover: none) {
+      &:active {
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
   }
 }
@@ -83,9 +102,18 @@
     text-transform: capitalize;
 
     .hover {
-      &:hover {
-        cursor: pointer;
-        text-decoration: underline;
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+
+      @media (hover: none) {
+        &:active {
+          text-decoration: underline;
+          cursor: pointer;
+        }
       }
     }
 

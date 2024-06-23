@@ -13,10 +13,20 @@
   justify-content: space-between;
   box-shadow: 1px 1px 5px grey;
 
-  &:hover {
-    text-decoration: underline;
-    cursor: pointer;
-    box-shadow: 2px 2px 8px grey;
+  @media (hover: hover) {
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+      box-shadow: 2px 2px 8px grey;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      text-decoration: underline;
+      cursor: pointer;
+      box-shadow: 2px 2px 8px grey;
+    }
   }
 
   &:active {
@@ -26,17 +36,17 @@
 
 .arrow_down {
   transform: rotate(0deg);
-  transition: transform 0.5s linear;
+  transition: transform 0.2s linear;
 }
 .arrow_up {
   transform: rotate(180deg);
-  transition: transform 0.5s linear;
+  transition: transform 0.2s linear;
 }
 
 .review_section {
   padding: 0px 20px;
   overflow: hidden;
-  transition: max-height 0.5s ease-out;
+  transition: max-height 0.2s ease-out;
   box-sizing: border-box;
 }
 
@@ -130,6 +140,22 @@
     .rating_icon {
       color: orange;
       margin-left: 5px;
+    }
+
+    .opinion {
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+
+      @media (hover: none) {
+        &:active {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
     }
   }
 }
