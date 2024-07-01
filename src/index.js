@@ -20,7 +20,8 @@ import { CartPage, loader as cartPageLoader } from "./pages/CartPage/CartPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />,
+    // element: <MainLayout />,
+    element: <App />,
     errorElement: (
       <div>
         <h1>Error</h1>
@@ -51,9 +52,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(<App />);
 root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  // <React.StrictMode>
+  <RouterProvider router={router} />
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

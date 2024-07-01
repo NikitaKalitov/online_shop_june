@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { fetchAllProducts, fetchProductById } from "../api/fetcher";
+import { API } from "../api/fetcher";
 import { Product } from "../models/models";
 
 interface ProductsStoreState {
@@ -29,7 +29,7 @@ export const useProductsStore = create<ProductsStoreState>()(
       //
       getAllProducts: async () => {
         if (get().allProducts.length === 0) {
-          const productsJson = await fetchAllProducts();
+          const productsJson = await API.fetchAllProducts();
           let allProducts: Array<Product> = [];
           for (let i = 0; i < productsJson.length; i++) {
             allProducts.push(Product.fromJson(productsJson[i]));
@@ -57,7 +57,7 @@ export const useProductsStore = create<ProductsStoreState>()(
       //
       getDescProduct: async (id: number) => {
         if (get().descProduct == null || get().descProduct?.id !== id) {
-          const product = await fetchProductById(id);
+          const product = await API.fetchProductById(id);
           set({ descProduct: product });
           return product;
         } else {
@@ -98,7 +98,7 @@ export const useProductsStore = create<ProductsStoreState>()(
       },
     }),
     {
-      name: "products-store-new",
+      name: "products-store",
       storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({
         cartIds: state.cartIds,

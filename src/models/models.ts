@@ -138,3 +138,43 @@ export class DateClass {
     );
   }
 }
+
+export class UserClass {
+  id: number;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  image: string;
+
+  constructor(
+    id: number,
+    username: string,
+    email: string,
+    firstName: string,
+    lastName: string,
+    gender: string,
+    image: string
+  ) {
+    this.id = id;
+    this.username = username;
+    this.email = email;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.image = image;
+  }
+
+  static fromJson(json: any) {
+    return new UserClass(
+      json.id,
+      json.username,
+      json.email,
+      json.firstName,
+      json.lastName,
+      json.gender,
+      json.image
+    );
+  }
+}
