@@ -3,44 +3,68 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { fetchAllProducts, fetchProductById } from "../api/fetcher";
 import { Product } from "../models/models";
 
-interface ProductsState {
-  products: Array<Product>;
-  idsForProductsInCart: Array<number>;
-  productsInCart: Array<Product>;
-  descProductId: number;
-  currentProduct: Product;
-  createProductsListFromJson: () => Promise<void>;
+interface ProductsStoreState {
+  allProducts: Array<Product>;
+  cartIds: Array<number>;
+  cartProducts: Array<Product>;
+  descProduct: Product;
+
+  getAllProducts: () => Promise<Array<Product>>;
+  getCartProducts: () => Promise<Array<Product>>;
+  getDescProduct: (id: number) => Promise<Product>;
+  //
   onButtonClick: (id: number, addToCart: boolean) => void;
   addProductToCart: (id: number) => void;
   removeProductFromCart: (id: number) => void;
-  createCartListFromData: () => Promise<void>;
-  setDescProductId: (id: number) => void;
-  clearDescProductId: () => void;
-  getProductById: () => Promise<Product>;
 }
 
-export const useProductsStore = create<ProductsState>()(
+export const useProductsStore = create<ProductsStoreState>()(
   persist(
     (set, get) => ({
-      //
-      products: [],
-      idsForProductsInCart: [],
-      productsInCart: [],
-      descProductId: 0,
-      currentProduct: Product.empty(),
+      allProducts: [],
+      cartIds: [],
+      cartProducts: [],
+      descProduct: null,
       //
       //
-      createProductsListFromJson: async () => {
-        if (get().products.length === 0) {
+      getAllProducts: async () => {
+        if (get().allProducts.length === 0) {
           const productsJson = await fetchAllProducts();
-          let products: Array<Product> = [];
+          let allProducts: Array<Product> = [];
           for (let i = 0; i < productsJson.length; i++) {
-            products.push(Product.fromJson(productsJson[i]));
+            allProducts.push(Product.fromJson(productsJson[i]));
           }
-          set({ products: [...products] });
-          console.log(products);
+          set({ allProducts: [...allProducts] });
+        }
+        return get().allProducts;
+      },
+      //
+      getCartProducts: async () => {
+        await get().getAllProducts();
+        if (get().cartIds.length !== get().cartProducts.length) {
+          let cartProducts: Array<Product> = [];
+          for (let i = 0; i < get().cartIds.length; i++) {
+            cartProducts.push(
+              get().allProducts.filter(
+                (product) => product.id === get().cartIds[i]
+              )[0]
+            );
+          }
+          set({ cartProducts: [...cartProducts] });
+        }
+        return get().cartProducts;
+      },
+      //
+      getDescProduct: async (id: number) => {
+        if (get().descProduct == null || get().descProduct?.id !== id) {
+          const product = await fetchProductById(id);
+          set({ descProduct: product });
+          return product;
+        } else {
+          return get().descProduct;
         }
       },
+      //
       //
       onButtonClick: (id: number, addToCart: boolean) => {
         addToCart
@@ -49,74 +73,35 @@ export const useProductsStore = create<ProductsState>()(
       },
       //
       addProductToCart: (id: number) => {
-        if (
-          !get().idsForProductsInCart.filter((productId) => productId === id)[0]
-        ) {
-          const productToCart: Product = get().products.filter(
+        if (!get().cartIds.filter((productId) => productId === id)[0]) {
+          const product: Product = get().allProducts.filter(
             (product) => product.id === id
           )[0];
           set((state) => ({
-            idsForProductsInCart: [...state.idsForProductsInCart, id],
-            productsInCart: [...state.productsInCart, productToCart],
+            cartIds: [...state.cartIds, id],
+            cartProducts: [...state.cartProducts, product],
           }));
         }
       },
       //
       removeProductFromCart: (id: number) => {
-        const newProductIds: Array<number> = get().idsForProductsInCart.filter(
+        const newProductIds: Array<number> = get().cartIds.filter(
           (productId) => productId !== id
         );
-        const newProductsInCart: Array<Product> = get().productsInCart.filter(
+        const newProductsInCart: Array<Product> = get().cartProducts.filter(
           (product) => product.id !== id
         );
         set({
-          idsForProductsInCart: newProductIds,
-          productsInCart: newProductsInCart,
+          cartIds: newProductIds,
+          cartProducts: newProductsInCart,
         });
       },
-      //
-      createCartListFromData: async () => {
-        await get().createProductsListFromJson();
-        if (get().idsForProductsInCart.length !== get().productsInCart.length) {
-          let productsInCart: Array<Product> = [];
-          for (let i = 0; i < get().idsForProductsInCart.length; i++) {
-            productsInCart.push(
-              get().products.filter(
-                (product) => product.id === get().idsForProductsInCart[i]
-              )[0]
-            );
-          }
-          set({ productsInCart: [...productsInCart] });
-        }
-      },
-      //
-      setDescProductId: (id: number) => {
-        set({ descProductId: id });
-      },
-      //
-      clearDescProductId: () => {
-        set({ descProductId: 0 });
-      },
-      //
-      getProductById: async () => {
-        if (
-          get().currentProduct.id === 0 ||
-          get().currentProduct.id !== get().descProductId
-        ) {
-          const product = await fetchProductById(get().descProductId);
-          set({ currentProduct: product });
-          return product;
-        } else {
-          return get().currentProduct;
-        }
-      },
-      //
     }),
     {
-      name: "products-store",
+      name: "products-store-new",
       storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({
-        idsForProductsInCart: state.idsForProductsInCart,
+        cartIds: state.cartIds,
       }),
     }
   )

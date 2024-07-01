@@ -1,17 +1,16 @@
-import React, { useEffect } from "react";
+import * as React from "react";
 import { LoaderView } from "../../components/Loader/Loader";
-import { useProductsStore } from "../../stores/productsStore";
 import { ProductsListView } from "../../components/ProductList/ProductList";
+import { useProductsStore } from "../../stores/productsStore";
+
+export const loader = async () => {
+  const getAllProducts = useProductsStore.getState().getAllProducts;
+  const allProducts = await getAllProducts();
+  return allProducts;
+};
 
 export const AllProductsPage = () => {
-  const createProductsListFromJson = useProductsStore(
-    (state) => state.createProductsListFromJson
-  );
-  const products = useProductsStore((state) => state.products);
-
-  useEffect(() => {
-    createProductsListFromJson();
-  });
+  const products = useProductsStore((state) => state.allProducts);
 
   return (
     <>

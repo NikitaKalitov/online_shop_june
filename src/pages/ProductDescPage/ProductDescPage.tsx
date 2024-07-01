@@ -1,22 +1,21 @@
 import * as React from "react";
-import { useProductsStore } from "../../stores/productsStore";
 import styles from "./ProductDescPage.module.scss";
-import { useEffect, useState } from "react";
 import { Product } from "../../models/models";
 import { LoaderView } from "../../components/Loader/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { Reviews } from "./Reviews/Reviews";
+import { Reviews } from "../../components/Reviews/Reviews";
+import { useProductsStore } from "../../stores/productsStore";
+
+export const loader = async ({ params, request }) => {
+  const getDescProduct = useProductsStore.getState().getDescProduct;
+  const product = await getDescProduct(params.productId);
+
+  return product;
+};
 
 export const ProductDescPage = () => {
-  const [product, setProduct] = useState(Product.empty());
-  const getProductById = useProductsStore((state) => state.getProductById);
-
-  useEffect(() => {
-    getProductById().then((product) => {
-      setProduct(product);
-    });
-  });
+  const product = useProductsStore((state) => state.descProduct);
 
   return (
     <>

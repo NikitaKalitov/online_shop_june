@@ -4,27 +4,45 @@
   width: 100%;
   height: 50px;
   box-shadow: 3px 3px 8px gainsboro;
+}
 
-  .header_content {
-    margin: auto;
-    padding: 15px;
-    max-width: 768px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+.header_content {
+  margin: auto;
+  padding: 15px;
+  max-width: 768px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.link {
+  color: white;
+  text-shadow: 1px 1px 5px black;
+
+  @media (hover: hover) {
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 
-  .icon {
-    margin-right: 5px;
+  @media (hover: none) {
+    &:active {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
+}
 
-  .link {
-    color: white;
-    text-shadow: 1px 1px 5px black;
-  }
+a {
+  color: white;
+  text-decoration: none;
+}
 
-  .link:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
+.active {
+  text-decoration: underline;
 }

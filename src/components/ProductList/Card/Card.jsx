@@ -1,6 +1,5 @@
 import * as React from "react";
 import styles from "./Card.module.scss";
-import { useProductsStore } from "../../../stores/productsStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCartPlus,
@@ -8,8 +7,8 @@ import {
   faStar,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import * as classNames from "classnames";
-import { useNavigationStore } from "../../../stores/navigationStore";
+import { Link } from "react-router-dom";
+import { useProductsStore } from "../../../stores/productsStore";
 
 export const Card = ({ product }) => {
   return (
@@ -61,16 +60,11 @@ const Image = ({ link }) => {
 };
 
 const Title = ({ title, id }) => {
-  const onTitleClick = useNavigationStore((state) => state.goProductDescPage);
   return (
     <p className={styles.card_product_title}>
-      <span
-        onClick={() => {
-          onTitleClick(id);
-        }}
-      >
-        {title}
-      </span>
+      <Link to={`${id}`} preventScrollReset={true}>
+        <span>{title}</span>
+      </Link>
     </p>
   );
 };
@@ -118,9 +112,7 @@ const BrandCart = ({ brand }) => {
 
 const Button = ({ id }) => {
   const onButtonClick = useProductsStore((state) => state.onButtonClick);
-  const idsForProductsInCart = useProductsStore(
-    (state) => state.idsForProductsInCart
-  );
+  const idsForProductsInCart = useProductsStore((state) => state.cartIds);
 
   return (
     <div

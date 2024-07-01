@@ -1,13 +1,9 @@
 import * as React from "react";
 import styles from "./Reviews.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowDown,
-  faArrowUp,
-  faStar,
-} from "@fortawesome/free-solid-svg-icons";
-import { useProductsStore } from "../../../stores/productsStore";
-import { DateClass, ReviewClass } from "../../../models/models";
+import { faArrowDown, faStar } from "@fortawesome/free-solid-svg-icons";
+import { DateClass, ReviewClass } from "../../models/models";
+import { useProductsStore } from "../../stores/productsStore";
 
 export const Reviews = () => {
   const [show, setShow] = React.useState(false);
@@ -44,7 +40,7 @@ const Button = ({
 };
 
 const Body = ({ show }: { show: boolean }) => {
-  const product = useProductsStore((state) => state.currentProduct);
+  const product = useProductsStore((state) => state.descProduct);
 
   const element = document.getElementById("review_section");
 
