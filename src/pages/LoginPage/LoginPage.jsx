@@ -3,6 +3,21 @@ import { redirect, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/authStore";
 import styles from "./LoginPage.module.scss";
 
+export const loader = async () => {
+  const user = useAuthStore.getState().user;
+  console.log(`user ${user}`);
+  if (user) {
+    const checkLogin = useAuthStore.getState().checkLogin;
+    const authStatus = await checkLogin();
+    console.log(`authStatus ${authStatus}`);
+    if (authStatus) {
+      return redirect("/products");
+    }
+  } else {
+    return null;
+  }
+};
+
 export const LoginPage = () => {
   return (
     <div className={styles.login_page}>
@@ -57,7 +72,7 @@ const LoginPassword = () => {
             setVisible((value) => !value);
           }}
         >
-          Показать пароль
+          Show password
         </span>
       </p>
     </div>

@@ -1,12 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import * as React from "react";
+import * as ReactDOM from "react-dom/client";
 import App from "./App";
 import {
   RouterProvider,
   createBrowserRouter,
   redirect,
 } from "react-router-dom";
-import { MainLayout } from "./layouts/MainLayout/MainLayout";
 import {
   AllProductsPage,
   loader as allProductsPageLoader,
@@ -16,7 +15,10 @@ import {
   loader as productDescPageLoader,
 } from "./pages/ProductDescPage/ProductDescPage";
 import { CartPage, loader as cartPageLoader } from "./pages/CartPage/CartPage";
-import { LoginPage } from "./pages/LoginPage/LoginPage";
+import {
+  LoginPage,
+  loader as loginPageLoader,
+} from "./pages/LoginPage/LoginPage";
 import { RequireAuth } from "./hoc/RequireAuth";
 import { useAuthStore } from "./stores/authStore";
 
@@ -33,7 +35,7 @@ const router = createBrowserRouter([
       {
         index: true,
         loader: () => {
-          return redirect("/products");
+          return redirect("/login");
         },
       },
       {
@@ -43,22 +45,31 @@ const router = createBrowserRouter([
       },
       {
         path: "products/:productId",
-        element: <RequireAuth><ProductDescPage /></RequireAuth>,
+        element: <ProductDescPage />,
         loader: productDescPageLoader,
       },
-      { path: "cart", element: <CartPage />, loader: cartPageLoader },
+      {
+        path: "cart",
+        element: (
+          <RequireAuth>
+            <CartPage />
+          </RequireAuth>
+        ),
+        loader: cartPageLoader,
+      },
     ],
   },
   {
-    path: 'login',
+    path: "login",
     element: <LoginPage />,
+    loader: loginPageLoader,
   },
   {
-    path: 'logout',
+    path: "logout",
     loader: async () => {
       await useAuthStore.getState().logout();
-      return redirect('/login');
-    }
+      return redirect("/login");
+    },
   },
 ]);
 

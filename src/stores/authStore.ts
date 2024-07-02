@@ -1,4 +1,3 @@
-import { getAllByTestId } from "@testing-library/react";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { API } from "../api/fetcher";
@@ -32,7 +31,7 @@ export const useAuthStore = create<AuthStoreState>()(
         );
         if (user.id) {
           // const timeoutTimer = Date.now() + 30 * 60 * 1000;
-          const timeoutTimer = Date.now() + 1 * 5 * 1000;
+          const timeoutTimer = Date.now() + 1 * 10 * 1000;
           set({
             user: user,
             _token: token,
@@ -59,7 +58,7 @@ export const useAuthStore = create<AuthStoreState>()(
           console.log(`reLogin ${value}`);
           return value;
         } else {
-          console.log(true);
+          console.log("without reLogin");
           return true;
         }
       },
@@ -72,7 +71,7 @@ export const useAuthStore = create<AuthStoreState>()(
         );
         if (newToken && newRefreshToken) {
           // const timeoutTimer = Date.now() + 30 * 60 * 1000;
-          const timeoutTimer = Date.now() + 1 * 5 * 1000;
+          const timeoutTimer = Date.now() + 1 * 10 * 1000;
           set({
             _token: newToken,
             _refreshToken: newRefreshToken,
@@ -99,9 +98,10 @@ export const useAuthStore = create<AuthStoreState>()(
       name: "auth-store",
       storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({
-        token: state._token,
+        user: state.user,
+        _token: state._token,
         _refreshToken: state._refreshToken,
-        tokenTimeout: state._tokenTimeout,
+        _tokenTimeout: state._tokenTimeout,
       }),
     }
   )

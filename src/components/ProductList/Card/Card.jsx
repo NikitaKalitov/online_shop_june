@@ -7,8 +7,9 @@ import {
   faStar,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useProductsStore } from "../../../stores/productsStore";
+import { useAuthStore } from "../../../stores/authStore";
 
 export const Card = ({ product }) => {
   return (
@@ -111,16 +112,22 @@ const BrandCart = ({ brand }) => {
 };
 
 const Button = ({ id }) => {
+  const navigate = useNavigate();
+  const checkLogin = useAuthStore((state) => state.checkLogin);
   const onButtonClick = useProductsStore((state) => state.onButtonClick);
   const idsForProductsInCart = useProductsStore((state) => state.cartIds);
 
+  const onClick = async () => {
+    const value = await checkLogin();
+    if (value) {
+      onButtonClick(id, true);
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
-    <div
-      className={styles.card_product_button}
-      onClick={() => {
-        onButtonClick(id, true);
-      }}
-    >
+    <div className={styles.card_product_button} onClick={onClick}>
       <>
         {idsForProductsInCart.filter((productId) => productId === id)[0] ? (
           <p>
@@ -139,15 +146,21 @@ const Button = ({ id }) => {
 };
 
 const ButtonCart = ({ id }) => {
+  const navigate = useNavigate();
+  const checkLogin = useAuthStore((state) => state.checkLogin);
   const onButtonClick = useProductsStore((state) => state.onButtonClick);
 
+  const onClick = async () => {
+    const value = await checkLogin();
+    if (value) {
+      onButtonClick(id, false);
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
-    <div
-      className={styles.card_product_button}
-      onClick={() => {
-        onButtonClick(id, false);
-      }}
-    >
+    <div className={styles.card_product_button} onClick={onClick}>
       <p>
         <span>Удалить</span>
         <FontAwesomeIcon icon={faTrash} />
