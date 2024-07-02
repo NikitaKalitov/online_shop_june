@@ -1,4 +1,4 @@
-import { faCartShopping, faList } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faList, faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import styles from "./Header.module.scss";
@@ -10,6 +10,7 @@ export const Header = () => {
       <div className={styles.header_content}>
         <LinkComponent to={"products"} icon={faList} text={"Products"} />
         <LinkComponent to={"cart"} icon={faCartShopping} text={"Cart"} />
+        <LinkComponent to={"/logout"} icon={faRightToBracket} text={"Log out"} />
       </div>
     </div>
   );

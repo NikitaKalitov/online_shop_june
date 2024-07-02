@@ -1,0 +1,107 @@
+.login_page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  padding: 0px 10px;
+}
+
+.login_container {
+  box-sizing: border-box;
+  margin: auto;
+  background-color: gainsboro;
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+h1 {
+  font-size: 48px;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.field_container {
+  width: 100%;
+}
+
+.field {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  font-size: 24px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.password_checkbox {
+  display: flex;
+  flex-direction: row;
+  padding-top: 5px;
+  align-content: center;
+
+  input {
+    margin: 0px 5px;
+    align-content: center;
+
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    @media (hover: none) {
+      &:active {
+        cursor: pointer;
+      }
+    }
+  }
+
+  span {
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    @media (hover: none) {
+      &:active {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.login_button {
+  align-self: center;
+  width: fit-content;
+  background-color: wheat;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px grey;
+
+  span {
+    font-size: 24px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      cursor: pointer;
+    }
+  }
+
+  &:active {
+    box-shadow: 1px 1px 1px grey;
+  }
+}

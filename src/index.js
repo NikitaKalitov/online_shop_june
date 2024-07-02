@@ -16,11 +16,13 @@ import {
   loader as productDescPageLoader,
 } from "./pages/ProductDescPage/ProductDescPage";
 import { CartPage, loader as cartPageLoader } from "./pages/CartPage/CartPage";
+import { LoginPage } from "./pages/LoginPage/LoginPage";
+import { RequireAuth } from "./hoc/RequireAuth";
+import { useAuthStore } from "./stores/authStore";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    // element: <MainLayout />,
     element: <App />,
     errorElement: (
       <div>
@@ -41,11 +43,22 @@ const router = createBrowserRouter([
       },
       {
         path: "products/:productId",
-        element: <ProductDescPage />,
+        element: <RequireAuth><ProductDescPage /></RequireAuth>,
         loader: productDescPageLoader,
       },
       { path: "cart", element: <CartPage />, loader: cartPageLoader },
     ],
+  },
+  {
+    path: 'login',
+    element: <LoginPage />,
+  },
+  {
+    path: 'logout',
+    loader: async () => {
+      await useAuthStore.getState().logout();
+      return redirect('/login');
+    }
   },
 ]);
 

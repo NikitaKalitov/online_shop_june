@@ -26,7 +26,24 @@ export class API {
     const user = UserClass.fromJson(json);
     const token: string = json.token;
     const refreshToken: string = json.refreshToken;
-    console.log(json);
+    // console.log(json);
     return { user, token, refreshToken };
+  };
+
+  static refreshToken = async (refreshToken: string) => {
+    const response = await fetch("https://dummyjson.com/auth/refresh", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        refreshToken: refreshToken,
+      }),
+    });
+    const json = await response.json();
+    const newToken: string = json.token;
+    const newRefreshToken: string = json.refreshToken;
+    // console.log(json);
+    return { newToken, newRefreshToken };
   };
 }

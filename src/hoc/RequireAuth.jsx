@@ -3,11 +3,20 @@ import { useAuthStore } from "../stores/authStore";
 import { Navigate } from "react-router-dom";
 
 export const RequireAuth = ({ children }) => {
-  const token = useAuthStore((state) => state.token);
+  const checkLogin = useAuthStore((state) => state.checkLogin);
+  const [loggedIn, setLoggedIn] = React.useState(null);
 
-  if (token == null) {
-    return <Navigate to={"/login"} replace={true} />;
+  React.useEffect(() => {
+    checkLogin().then((value) => { setLoggedIn(value) });
+  }, []);
+
+
+  if (loggedIn != null) {
+    if (!loggedIn) {
+      return <Navigate to={"/login"} replace={true} />;
+    } else {
+      console.log("return children");
+      return <>{children}</>;
+    }
   }
-
-  return { children };
 };
