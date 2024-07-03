@@ -79,6 +79,7 @@ export const useAuthStore = create<AuthStoreState>()(
           });
           return true;
         } else {
+          await get().logout();
           return false;
         }
       },

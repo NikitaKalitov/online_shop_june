@@ -19,8 +19,13 @@ import {
   LoginPage,
   loader as loginPageLoader,
 } from "./pages/LoginPage/LoginPage";
-import { RequireAuth } from "./hoc/RequireAuth";
+import {
+  AuthWarning,
+  RequireAuth,
+  loader as authLoader,
+} from "./hoc/RequireAuth";
 import { useAuthStore } from "./stores/authStore";
+import { AccountPage } from "./pages/AccountPage/AccountPage";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +49,11 @@ const router = createBrowserRouter([
         loader: allProductsPageLoader,
       },
       {
+        path: "products/auth_warning",
+        element: <AuthWarning />,
+        loader: authLoader,
+      },
+      {
         path: "products/:productId",
         element: <ProductDescPage />,
         loader: productDescPageLoader,
@@ -57,12 +67,25 @@ const router = createBrowserRouter([
         ),
         loader: cartPageLoader,
       },
+      {
+        path: "cart/auth_warning",
+        element: <AuthWarning />,
+        loader: authLoader,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
+        loader: loginPageLoader,
+      },
+      {
+        path: "account",
+        element: (
+          <RequireAuth>
+            <AccountPage />
+          </RequireAuth>
+        ),
+      },
     ],
-  },
-  {
-    path: "login",
-    element: <LoginPage />,
-    loader: loginPageLoader,
   },
   {
     path: "logout",

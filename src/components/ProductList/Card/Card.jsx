@@ -122,7 +122,7 @@ const Button = ({ id }) => {
     if (value) {
       onButtonClick(id, true);
     } else {
-      navigate("/login");
+      navigate("auth_warning");
     }
   };
 
@@ -155,7 +155,7 @@ const ButtonCart = ({ id }) => {
     if (value) {
       onButtonClick(id, false);
     } else {
-      navigate("/login");
+      navigate("auth_warning");
     }
   };
 

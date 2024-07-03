@@ -1,0 +1,84 @@
+.account_page_container {
+  padding: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.account_page_body {
+  background-color: gainsboro;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account_page_avatar {
+  align-self: center;
+  width: 40%;
+  max-width: 250px;
+  text-align: center;
+
+  img {
+    width: 100%;
+  }
+}
+
+.account_first_last_name {
+  padding: 5px 0;
+  align-self: center;
+
+  p {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+.account_gender {
+  padding: 5px 0;
+
+  p {
+    font-style: italic;
+  }
+}
+
+.account_username {
+  padding: 5px 0;
+
+  p {
+    font-weight: bold;
+  }
+}
+
+.account_email {
+  padding: 5px 0;
+
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.account_logout {
+  margin: 5px 0;
+  background-color: wheat;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px grey;
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      cursor: pointer;
+    }
+  }
+
+  &:active {
+    box-shadow: 1px 1px 1px grey;
+  }
+}
