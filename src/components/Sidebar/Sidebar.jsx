@@ -3,6 +3,7 @@ import {
   faList,
   faRightToBracket,
   faUserCircle,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
@@ -19,14 +20,12 @@ export const Sidebar = () => {
   return (
     <div
       className={styles.sidebar_container}
-      // className="sidebar_container"
       style={
         location.pathname.includes("auth_warning") ||
-          location.pathname.includes("login")
+        location.pathname.includes("login")
           ? { display: "none" }
           : {}
       }
-    // id={"sidebar"}
     >
       <div className={styles.sidebar_body}>
         <LinkComponent
@@ -34,82 +33,86 @@ export const Sidebar = () => {
           icon={faList}
           text={"Products"}
           visible={true}
-          onClick={() => { }}
+          onClick={() => {}}
         />
         <LinkComponent
           to={"cart"}
           icon={faCartShopping}
           text={"Cart"}
           visible={true}
-          onClick={() => { }}
+          onClick={() => {}}
         />
         <LinkComponent
           to={"/account"}
           icon={faUserCircle}
           text={"Account"}
           visible={user}
-          onClick={() => { }}
+          onClick={() => {}}
         />
         <LinkComponent
           to={"/login"}
           icon={faRightToBracket}
           text={"Log in"}
           visible={!user}
-          onClick={() => { }}
+          onClick={() => {}}
         />
       </div>
     </div>
   );
 };
 
-export const SidebarToToggle = () => {
+export const SidebarHamburger = () => {
   const location = useLocation();
   const user = useAuthStore((state) => state.user);
-  const toggle = useSidebarStore((state) => state.toggle);
-  const changeToggle = useSidebarStore((state) => state.changeToggle);
+  const visible = useSidebarStore((state) => state.visible);
+  const hide = useSidebarStore((state) => state.hide);
 
   return (
     <div
-      className={toggle ? styles.sidebar_container_to_toggle : styles.invisible}
-      // className="sidebar_container"
+      className={
+        visible ? styles.sidebar_hamburger_container : styles.invisible
+      }
       style={
         location.pathname.includes("auth_warning") ||
-          location.pathname.includes("login")
+        location.pathname.includes("login")
           ? { display: "none" }
           : {}
       }
-      id={"sidebar"}
     >
-      <div className={styles.sidebar_body}>
+      <div className={styles.sidebar_hamburger_body}>
+        <div className={styles.toggle_sidebar} onClick={hide}>
+          <FontAwesomeIcon icon={faXmark} />
+        </div>
         <LinkComponent
           to={"products"}
           icon={faList}
           text={"Products"}
           visible={true}
-          onClick={changeToggle}
+          onClick={hide}
         />
         <LinkComponent
           to={"cart"}
           icon={faCartShopping}
           text={"Cart"}
           visible={true}
-          onClick={changeToggle}
+          onClick={hide}
         />
         <LinkComponent
           to={"/account"}
           icon={faUserCircle}
           text={"Account"}
           visible={user}
-          onClick={changeToggle}
+          onClick={hide}
         />
         <LinkComponent
           to={"/login"}
           icon={faRightToBracket}
           text={"Log in"}
           visible={!user}
-          onClick={changeToggle}
+          onClick={hide}
         />
       </div>
+      <div className={styles.sidebar_hamburger_space} onClick={hide}></div>
     </div>
   );
 };

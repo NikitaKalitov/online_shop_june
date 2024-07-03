@@ -16,6 +16,7 @@ interface ProductsStoreState {
   onButtonClick: (id: number, addToCart: boolean) => void;
   addProductToCart: (id: number) => void;
   removeProductFromCart: (id: number) => void;
+  clearCart: () => void;
 }
 
 export const useProductsStore = create<ProductsStoreState>()(
@@ -95,6 +96,10 @@ export const useProductsStore = create<ProductsStoreState>()(
           cartIds: newProductIds,
           cartProducts: newProductsInCart,
         });
+      },
+      //
+      clearCart: () => {
+        set({ cartIds: [], cartProducts: [] });
       },
     }),
     {

@@ -18,23 +18,23 @@ export const Header = () => {
 };
 
 const ToggleSidebar = () => {
-  const toggle = useSidebarStore((state) => state.toggle);
-  const toggleVisible = useSidebarStore((state) => state.changeToggle);
+  const visible = useSidebarStore((state) => state.visible);
+  const show = useSidebarStore((state) => state.show);
   const location = useLocation();
 
   return (
     <div
       className={styles.toggle_sidebar}
-      onClick={toggleVisible}
+      onClick={show}
       style={
         location.pathname.includes("auth_warning") ||
-          location.pathname.includes("login")
+        location.pathname.includes("login")
           ? { display: "none" }
           : {}
       }
-      id={'sidebar_toggle_button'}
+      id={"sidebar_toggle_button"}
     >
-      <FontAwesomeIcon icon={toggle ? faXmark : faBars} />
+      <FontAwesomeIcon icon={visible ? faXmark : faBars} />
     </div>
   );
 };

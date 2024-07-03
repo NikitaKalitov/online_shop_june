@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { API } from "../api/fetcher";
 import { UserClass } from "../models/models";
+import { useProductsStore } from "./productsStore";
 
 interface AuthStoreState {
   user: UserClass;
@@ -85,6 +86,7 @@ export const useAuthStore = create<AuthStoreState>()(
       },
       //
       logout: async () => {
+        useProductsStore.getState().clearCart();
         set({
           user: null,
           _token: null,

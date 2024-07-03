@@ -26,9 +26,13 @@
 
 .toggle_sidebar {
   position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
   font-size: 24px;
   color: white;
   margin-left: 10px;
+  align-content: center;
 
   &:hover {
     cursor: pointer;

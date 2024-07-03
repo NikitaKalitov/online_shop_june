@@ -1,10 +1,13 @@
 .sidebar_container {
   box-sizing: border-box;
+  position: -webkit-sticky;
   position: sticky;
   padding-top: 10px;
   padding-left: 10px;
+  padding-bottom: 10px;
   left: 0;
   top: 50px;
+  height: 100%;
 
   @media screen and (width < 700px) {
     display: none;
@@ -12,30 +15,14 @@
 
   @media screen and (width > 700px) {
     display: block;
+    position: -webkit-sticky;
     position: sticky;
   }
 
   @media screen and (width = 700px) {
     display: block;
+    position: -webkit-sticky;
     position: sticky;
-  }
-}
-
-.sidebar_container_to_toggle {
-  box-sizing: border-box;
-  position: absolute;
-  padding-top: 10px;
-  padding-left: 10px;
-  left: 0;
-  top: 50px;
-  display: block;
-
-  @media screen and (width > 700px) {
-    display: none;
-  }
-
-  @media screen and (width = 700px) {
-    display: none;
   }
 }
 
@@ -44,11 +31,43 @@
   border-radius: 10px;
   width: 180px;
   padding: 10px;
-  height: 500px;
   box-shadow: 1px 1px 5px grey;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.sidebar_hamburger_container {
+  background-color: rgba(61, 61, 61, 0.555);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar_hamburger_body {
+  background-color: gainsboro;
+  border-radius: 0px 10px 10px 0px;
+  width: 240px;
+  min-width: 240px;
+  padding: 10px;
+  padding-top: 60px;
+  height: 100%;
+  box-shadow: 1px 1px 5px grey;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.sidebar_hamburger_space {
+  width: 100%;
+  height: 100%;
 }
 
 .icon {
@@ -91,8 +110,40 @@ a {
 
 .active {
   text-decoration: underline;
+
+  .link_container {
+    background-color: wheat;
+  }
 }
 
 .invisible {
   display: none;
+}
+
+.toggle_sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  font-size: 24px;
+  color: black;
+  margin-left: 10px;
+  align-content: center;
+  box-sizing: border-box;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media screen and (width < 700px) {
+    display: block;
+  }
+
+  @media screen and (width > 700px) {
+    display: none;
+  }
+
+  @media screen and (width = 700px) {
+    display: none;
+  }
 }

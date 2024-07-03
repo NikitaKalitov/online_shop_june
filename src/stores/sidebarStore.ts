@@ -1,15 +1,20 @@
 import { create } from "zustand";
 
 interface SidebarStoreState {
-  toggle: boolean;
+  visible: boolean;
 
-  changeToggle: () => void;
+  show: () => void;
+  hide: () => void;
 }
 
 export const useSidebarStore = create<SidebarStoreState>()((set, get) => ({
-  toggle: false,
+  visible: false,
 
-  changeToggle: () => {
-    set({ toggle: !get().toggle });
+  show: () => {
+    set({ visible: true });
+  },
+
+  hide: () => {
+    set({ visible: false });
   },
 }));
