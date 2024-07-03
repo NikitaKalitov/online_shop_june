@@ -1,8 +1,9 @@
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import styles from "./Header.module.scss";
 import { useLocation } from "react-router-dom";
+import { useSidebarStore } from "../../stores/sidebarStore";
 
 export const Header = () => {
   const location = useLocation();
@@ -16,44 +17,15 @@ export const Header = () => {
   );
 };
 
-const getWindowWidth = () => {
-  const width = window.innerWidth;
-  return width;
-}
-
 const ToggleSidebar = () => {
-  const [visible, setVisible] = React.useState(false);
-  const [width, setWidth] = React.useState(window.innerWidth);
-
+  const toggle = useSidebarStore((state) => state.toggle);
+  const toggleVisible = useSidebarStore((state) => state.changeToggle);
   const location = useLocation();
-  const onClick = () => {
-    const sidebar = document.getElementById("sidebar");
-    if (visible) {
-      sidebar.style.display = "none";
-    } else {
-      sidebar.style.display = "block";
-      sidebar.style.position = "absolute";
-    }
-    setVisible((visible) => !visible);
-  };
-
-  // React.useEffect(() => {
-  //   function handleResize() {
-  //     setWidth(getWindowWidth());
-  //   }
-
-  //   window.addEventListener('resize', handleResize);
-  //   return () => window.removeEventListener('resize', handleResize);
-  // }, []);
-
-  // if (width >= 700 && sidebar.style.display == "none") {
-  //   document.getElementById('sidebar_toggle_button').click();
-  // }
 
   return (
     <div
       className={styles.toggle_sidebar}
-      onClick={onClick}
+      onClick={toggleVisible}
       style={
         location.pathname.includes("auth_warning") ||
           location.pathname.includes("login")
@@ -62,7 +34,7 @@ const ToggleSidebar = () => {
       }
       id={'sidebar_toggle_button'}
     >
-      <FontAwesomeIcon icon={faBars} />
+      <FontAwesomeIcon icon={toggle ? faXmark : faBars} />
     </div>
   );
 };

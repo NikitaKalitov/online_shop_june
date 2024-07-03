@@ -23,12 +23,20 @@
 
 .sidebar_container_to_toggle {
   box-sizing: border-box;
-  position: sticky;
+  position: absolute;
   padding-top: 10px;
   padding-left: 10px;
   left: 0;
   top: 50px;
-  display: none;
+  display: block;
+
+  @media screen and (width > 700px) {
+    display: none;
+  }
+
+  @media screen and (width = 700px) {
+    display: none;
+  }
 }
 
 .sidebar_body {
@@ -83,4 +91,8 @@ a {
 
 .active {
   text-decoration: underline;
+}
+
+.invisible {
+  display: none;
 }
