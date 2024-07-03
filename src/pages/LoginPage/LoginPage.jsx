@@ -28,7 +28,7 @@ export const LoginPage = () => {
 
 const LoginContainer = () => {
   return (
-    <div className={styles.login_container}>
+    <div className={styles.login_body}>
       <LoginText />
       <LoginUsername />
       <LoginPassword />

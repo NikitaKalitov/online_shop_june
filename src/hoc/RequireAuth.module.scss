@@ -52,4 +52,20 @@
   p {
     font-style: italic;
   }
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      cursor: pointer;
+    }
+  }
+
+  &:active {
+    box-shadow: 1px 1px 1px grey;
+  }
 }

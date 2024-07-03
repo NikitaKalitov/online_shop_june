@@ -85,6 +85,11 @@ const router = createBrowserRouter([
           </RequireAuth>
         ),
       },
+      {
+        path: "account/auth_warning",
+        element: <AuthWarning />,
+        loader: authLoader,
+      },
     ],
   },
   {
