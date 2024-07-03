@@ -1,39 +1,91 @@
-import { faCartShopping, faList, faRightToBracket, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import styles from "./Header.module.scss";
-import { Link, NavLink, useMatch } from "react-router-dom";
-import { useAuthStore } from "../../stores/authStore";
+import { useLocation } from "react-router-dom";
 
 export const Header = () => {
-  const user = useAuthStore((state) => state.user);
+  const location = useLocation();
   return (
     <div className={styles.header}>
+      <ToggleSidebar />
       <div className={styles.header_content}>
-        <LinkComponent to={"products"} icon={faList} text={"Products"} visible={true} />
-        <LinkComponent to={"cart"} icon={faCartShopping} text={"Cart"} visible={true} />
-        <LinkComponent to={"/account"} icon={faUserCircle} text={"Account"} visible={user} />
-        <LinkComponent to={"/login"} icon={faRightToBracket} text={"Log in"} visible={!user} />
+        <span>{getHeaderTitle(location.pathname)}</span>
       </div>
     </div>
   );
 };
 
-const LinkComponent = ({ icon, text, to, visible }) => {
-  const match = useMatch(to);
+const getWindowWidth = () => {
+  const width = window.innerWidth;
+  return width;
+}
 
+const ToggleSidebar = () => {
+  const [visible, setVisible] = React.useState(false);
+  const [width, setWidth] = React.useState(window.innerWidth);
 
+  const location = useLocation();
+  const onClick = () => {
+    const sidebar = document.getElementById("sidebar");
+    if (visible) {
+      sidebar.style.display = "none";
+    } else {
+      sidebar.style.display = "block";
+      sidebar.style.position = "absolute";
+    }
+    setVisible((visible) => !visible);
+  };
+
+  // React.useEffect(() => {
+  //   function handleResize() {
+  //     setWidth(getWindowWidth());
+  //   }
+
+  //   window.addEventListener('resize', handleResize);
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, []);
+
+  // if (width >= 700 && sidebar.style.display == "none") {
+  //   document.getElementById('sidebar_toggle_button').click();
+  // }
 
   return (
-    <p className={styles.link} style={visible ? {} : { display: "none" }}>
-      <NavLink
-        to={to}
-        className={match ? styles.active : ""}
-        preventScrollReset={true}
-      >
-        <FontAwesomeIcon icon={icon} className={styles.icon} />
-        {text}
-      </NavLink>
-    </p>
+    <div
+      className={styles.toggle_sidebar}
+      onClick={onClick}
+      style={
+        location.pathname.includes("auth_warning") ||
+          location.pathname.includes("login")
+          ? { display: "none" }
+          : {}
+      }
+      id={'sidebar_toggle_button'}
+    >
+      <FontAwesomeIcon icon={faBars} />
+    </div>
   );
+};
+
+const getHeaderTitle = (path) => {
+  if (path.includes("auth_required")) {
+    return "Auth required";
+  }
+  if (path.includes("/products")) {
+    if (path.includes("/products/")) {
+      return "Description";
+    } else {
+      return "Products";
+    }
+  }
+  if (path.includes("/cart")) {
+    return "Cart";
+  }
+  if (path.includes("/account")) {
+    return "Account";
+  }
+  if (path.includes("/login")) {
+    return "Welcome";
+  }
+  return "No data";
 };

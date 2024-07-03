@@ -1,0 +1,86 @@
+.sidebar_container {
+  box-sizing: border-box;
+  position: sticky;
+  padding-top: 10px;
+  padding-left: 10px;
+  left: 0;
+  top: 50px;
+
+  @media screen and (width < 700px) {
+    display: none;
+  }
+
+  @media screen and (width > 700px) {
+    display: block;
+    position: sticky;
+  }
+
+  @media screen and (width = 700px) {
+    display: block;
+    position: sticky;
+  }
+}
+
+.sidebar_container_to_toggle {
+  box-sizing: border-box;
+  position: sticky;
+  padding-top: 10px;
+  padding-left: 10px;
+  left: 0;
+  top: 50px;
+  display: none;
+}
+
+.sidebar_body {
+  background-color: gainsboro;
+  border-radius: 10px;
+  width: 180px;
+  padding: 10px;
+  height: 500px;
+  box-shadow: 1px 1px 5px grey;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.link_container {
+  border-radius: 10px;
+  padding: 10px;
+  background-color: whitesmoke;
+
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.link {
+  color: black;
+
+  @media (hover: hover) {
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.active {
+  text-decoration: underline;
+}

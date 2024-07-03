@@ -33,6 +33,7 @@ const LoginContainer = () => {
       <LoginUsername />
       <LoginPassword />
       <LoginButton />
+      <ContinueWithoutLoginButton />
     </div>
   );
 };
@@ -99,3 +100,13 @@ const LoginButton = () => {
     </div>
   );
 };
+
+const ContinueWithoutLoginButton = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className={styles.continue_without_login_button} onClick={() => { navigate("/products") }}>
+      <span>Continue without login</span>
+    </div>
+  );
+}

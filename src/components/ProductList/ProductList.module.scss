@@ -3,8 +3,10 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: absolute;
-  height: calc(100% - 50px);
+  // position: absolute;
+  // height: calc(100% - 50px);
   overflow-x: hidden;
   overflow-y: auto;
+  box-sizing: border-box;
+  height: 100%;
 }

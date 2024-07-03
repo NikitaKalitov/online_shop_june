@@ -113,3 +113,25 @@
     box-shadow: 1px 1px 1px grey;
   }
 }
+
+.continue_without_login_button {
+  align-self: center;
+
+  span {
+    font-size: 16px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}

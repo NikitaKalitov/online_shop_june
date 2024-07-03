@@ -1,0 +1,17 @@
+.body_layout_container {
+  display: flex;
+  flex-direction: row;
+  padding-top: 50px;
+  // padding-left: 200px;
+  box-sizing: border-box;
+  height: 100%;
+  // max-width: 800px;
+
+  @media screen and (width < 700px) {
+    padding-left: 0px;
+  }
+}
+
+// .body_layout {
+//   max-width: 800px;
+// }

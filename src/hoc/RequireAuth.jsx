@@ -58,9 +58,9 @@ export const AuthWarning = () => {
             }}
           />
           <AuthWarningButton
-            text={"Назад"}
+            text={"На главную"}
             onClick={() => {
-              navigate(-1);
+              navigate("/products");
             }}
           />
         </div>
